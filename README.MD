@@ -27,4 +27,4 @@ ____`getCategoryTables.py`
 
 5. Все не найденные куски фраз в текте считаем "возможностями" и предлагаем обратить внимание на следующие "возможности". Их тоже пробуем отфильтровать. Ну там уже будет виднее.
 
-![Image alt](commando.gif)
+![Image alt](http://git.urbantech.pro/muromcevn/qbt-productinnovations/blob/master/commando.gif)
