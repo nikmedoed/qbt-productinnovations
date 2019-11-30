@@ -2,7 +2,7 @@ from openpyxl import Workbook
 import pickle
 import traceback
 
-dataDir = "data/"
+dataDir = "../data/"
 
 def getCatTab(idlist, at, ca, pr):
     wb = Workbook()

@@ -3,7 +3,7 @@ import csv
 import pickle
 
 
-dataDir = "data/"
+dataDir = "../data/"
 dataAttributes = dataDir + "att.xlsx"
 dataCategories = dataDir + "cat.xlsx"
 dataProduct = dataDir + "prod.csv"
