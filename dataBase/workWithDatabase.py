@@ -1,12 +1,11 @@
-from openpyxl import Workbook
 import pickle
-import traceback
 import csv
 import copy
 
 import inspect
 import os
 import sys
+from dataBase.categoryTable import categoryTable
 
 def get_script_dir(follow_symlinks=True):
     if getattr(sys, 'frozen', False): # py2exe, PyInstaller, cx_Freeze
@@ -28,13 +27,16 @@ class productData(object):
                 prod = dict()
                 cat = dict()
                 atFrq = dict()
-                reader = csv.DictReader(open(path, "r", encoding='utf-8-sig'), delimiter=';')
+                reader = csv.DictReader(open(path, "r", encoding='utf-8'), delimiter=';')
                 # head = reader.fieldnames
                 cont = 0
                 for line in reader:
                     cont+=1
                     if cont %50000 == 0: print(cont)
                     d = dict(line)
+                    for i in d:
+                        if d[i] == 'NULL': d[i] = None
+                        # d[i] = d[i].decode('utf-8-sig').encode('utf8')
                     id = d.pop('PositionID')
                     attributeID = d.pop('ProductPositionAttributeID')
                     attVal = d.pop('ProductPositionAttribute')
@@ -47,7 +49,8 @@ class productData(object):
                             atFrq[atName] += 1
                         else:
                             atFrq[atName] = 1
-                    prod[id]['Attributes'][attributeID] = attVal
+                    if attVal: prod[id]['Attributes'][attributeID] = attVal
+                    prod[id]['id'] = id
                     # обновляем словарь категорий
                     catK = cat.get(d['CategoryName'])
                     if catK:
@@ -61,7 +64,7 @@ class productData(object):
                             'count': 1,
                             'attributes': {attributeID: atName}
                         }
-            print (cont)
+            print(cont)
             self.categories = cat
             self.products = prod
             self.attFreq = atFrq
@@ -77,12 +80,26 @@ class productData(object):
         with open(path, 'wb') as f:
             pickle.dump(self, f)
 
+    def getCategoryTable(self, id):
+        cat = self.categories[id]
+        prod = list(map(lambda x: self.products[x], cat['prodList']))
+        ct = categoryTable(cat, prod, self.attFreq)
+
+        # ct = cat.get("catTable")
+        # if not ct:
+        #     prod = list(map(lambda x: self.products[x],cat['prodList']))
+        #     ct = categoryTable(cat, prod)
+        #     cat['catTable'] = ct
+
+        return ct
+
+
+
     def __del__(self):
         pass
         # print("сохраняю данные базы")
         # self.saveData()
         # print("сохранено")
-
 
 
 if __name__ == '__main__':

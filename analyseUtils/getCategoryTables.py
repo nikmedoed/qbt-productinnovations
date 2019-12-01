@@ -1,7 +1,13 @@
 from openpyxl import Workbook
 import pickle
 import traceback
-from getDicts import getCategories
+
+def getCategories(product):
+    cat = set()
+    for i in product:
+        cat.add(product[i]['CategoryID'])
+    return list(cat)
+
 
 dataDir = "../data/"
 
