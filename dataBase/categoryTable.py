@@ -105,5 +105,5 @@ class categoryTable(object):
         weight = 0
         for k in range(len(self.attributeMatW)):
             w = self.attributeMatW[k][i]
-            weight += w * aw[k] + w * agw[k]
+            weight += w * aw[k] + w / agw[k]
         return weight
