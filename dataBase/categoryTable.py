@@ -42,6 +42,19 @@ class categoryTable(object):
                 # print(wProd)
                 ctTab.append(wProd)
                 attW[i] = self.count / attW[i]
+
+            # нормируем веса
+            attFWmax = max(attFW)
+            attWmax = max(attW)
+            if attFWmax > attWmax:
+                k = attFWmax/attWmax
+                for i in range(len(attW)):
+                    attW[i] *= k
+            else:
+                k = attWmax / attFWmax
+                for i in range(len(attFW)):
+                    attFW[i] *= k
+
             self.attributeGenW = attFW
             self.attributeCatW = attW
             self.attributeMatW = ctTab
@@ -53,11 +66,11 @@ class categoryTable(object):
         else:
             self.categtab = copy.deepcopy(prod)
 
-    def outTable(self):
+    def genOutData(self):
         keyList = ['id', 'ProductPositionName', 'ProductPositionShortName', 'ProductPositionOKPD2']
         outmx = []
-        outmx.append([""]*len(keyList) + ["Встречаемость"] + self.attributeGenW)
-        outmx.append([""]*len(keyList) + ["Заполненность"] + self.attributeCatW)
+        outmx.append([""] * len(keyList) + ["Встречаемость"] + self.attributeGenW)
+        outmx.append([""] * len(keyList) + ["Заполненность"] + self.attributeCatW)
         outmx.append(['Вес'] + keyList + self.atListNames)
 
         for i in self.sortedId:
@@ -66,6 +79,11 @@ class categoryTable(object):
             pr.extend(list(map(lambda x: prd[x], keyList)))
             pr.extend(list(map(lambda x: prd['Attributes'].get(x) if prd['Attributes'].get(x) else "", self.atListId)))
             outmx.append(pr)
+        self.outmx = outmx
+
+    def outTable(self):
+        self.genOutData()
+        outmx = self.outmx
 
         wb = Workbook()
         ws = wb.active

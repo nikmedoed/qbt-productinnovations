@@ -16,6 +16,6 @@ if __name__ == '__main__':
     # print(len(bigcats))
     cat = base.getCategoryTable(maxId)
 
-    analtab = []
+    analtab = ['USB-флеш-накопители', 'Видеокамеры', 'IP-камеры', 'Диски внешние', 'Диски жесткие', 'Носки', 'Полотенца бумажные']
     for i in analtab:
         base.getCategoryTable(i).outTable()

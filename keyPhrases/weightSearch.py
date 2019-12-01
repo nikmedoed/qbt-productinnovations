@@ -46,10 +46,10 @@ if __name__ == '__main__':
             c += 1
             s += j[0]
         temp = list(filter(lambda x: x[0] > 65, i))
-        wb.cell(row=k, column=col).value = "\n".join([a[1] for a in temp])
+        wb.cell(row=k, column=col).value = "-- " + "\n-- ".join([a[1] for a in temp])
         wb.cell(row=k, column=col+1).value = "\n".join([str(round(a[0], 2)) for a in temp])
-        k+=1
-    book.save(path)
-    print (s/c)
+        k += 1
+    book.save("restab.xlsx")
+    print(s/c)
 
 from gensim.models import word2vec
