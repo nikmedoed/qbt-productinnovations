@@ -1,0 +1,32 @@
+структура
+
+
+{
+	'attFreq': { 
+		'название атрибута': Количество
+		}
+	
+	'categories':{
+		НАЗВАНИЕКАТЕГОРИИ: {
+			'prodList': [список товаров], 
+			'count': 102, 
+			'attributes': {
+				IDатрибута: 'название'			
+			}
+	}
+	
+	'products':{
+		IDтовара: {
+			{
+				'ProductPositionName': 'имя', 
+				'ProductPositionShortName': 'NULL', 
+				'ProductPositionOKPD2': '17.23.12.110', 
+				'CategoryName': 'Конверты почтовые', 
+				'AttributeOKEI': '3', 
+				'Attributes': {
+						IDатрибута: 'значениие'
+					}
+			}
+		}
+	}
+}

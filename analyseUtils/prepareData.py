@@ -38,7 +38,7 @@ def getCat(path = dataCategories):
 
 def getProd(path = dataProduct):
     res = dict()
-    reader = csv.DictReader(open(path, "r"), delimiter='\t')
+    reader = csv.DictReader(open(path, "r", encoding='utf-8-sig'), delimiter=';')
     # head = reader.fieldnames
     for line in reader:
         d = dict(line)
@@ -51,9 +51,9 @@ def getProd(path = dataProduct):
         res[id]['Attributes'][i] = v
     return res
 
+product = getProd()
 attributes = getAttr()
 categories = getCat()
-product = getProd()
 
 with open(dataDir + 'data.bin', 'wb') as f:
     pickle.dump(attributes, f)

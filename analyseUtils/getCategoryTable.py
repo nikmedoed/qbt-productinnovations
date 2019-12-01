@@ -1,6 +1,7 @@
 from openpyxl import Workbook
 import pickle
 import traceback
+from getDicts import getCategories
 
 dataDir = "../data/"
 
@@ -52,13 +53,6 @@ def getCatTab(idlist, at, ca, pr):
             print(id)
             print('Ошибка:\n', traceback.format_exc())
     wb.save('alltables.xlsx')
-
-
-def getCategories(product):
-    cat = set()
-    for i in product:
-        cat.add(product[i]['CategoryID'])
-    return list(cat)
 
 
 if __name__== '__main__':

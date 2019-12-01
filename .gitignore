@@ -4,6 +4,10 @@
 tables/*
 data/*
 
+*.ini
+
+dataBase/dataBase.bin
+
 __pycache__/
 *.py[cod]
 *$py.class
