@@ -86,8 +86,8 @@ class productData(object):
 
 
 if __name__ == '__main__':
-    # data = productData("../data/prod2.csv", True)
-    # data.saveData()
+    data = productData("../data/prod2.csv", True)
+    data.saveData()
     test = productData()
     pass
 
